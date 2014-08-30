@@ -8,7 +8,6 @@
 
     if ( mysqli_num_rows($results)==1 ) {
       return true;
-
     }
     return false;
   }
