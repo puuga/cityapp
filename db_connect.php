@@ -2,7 +2,8 @@
 
 <?php
   // Create connection
-  $con = mysqli_connect("localhost","rls2014ss","rls2014ss","roomlinkDB");
+  //$con = mysqli_connect("localhost","rls2014ss","rls2014ss","roomlinkDB");
+  $con=mysqli_connect("us-cdbr-azure-west-a.cloudapp.net","b7cd25dab495bd","227b4abe","roomlinkDB");
 
   mysqli_set_charset($con , "UTF8");
 

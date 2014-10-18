@@ -20,6 +20,9 @@
   $post_lastname = isset($_POST["lastname"]) ? $_POST["lastname"] : "" ;
   $post_email = isset($_POST["email"]) ? $_POST["email"] : "" ;
   $post_birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "" ;
+  $post_birthdays = explode( "/" , $post_birthday);
+  $post_birthday = $post_birthdays[2]."/".$post_birthdays[0]."/".$post_birthdays[1];
+
 
   // escape variables for security
   $post_facebook_id = mysqli_real_escape_string($con, $post_facebook_id);
@@ -27,7 +30,8 @@
   $post_firstname = mysqli_real_escape_string($con, $post_firstname);
   $post_lastname = mysqli_real_escape_string($con, $post_lastname);
   $post_email = mysqli_real_escape_string($con, $post_email);
-  $post_birthday = mysqli_real_escape_string($con, $post_birthday);
+  //$post_birthday = mysqli_real_escape_string($con, $post_birthday);
+
 
 
   // ------------------------------------------------------------
@@ -86,11 +90,19 @@
     // check facebook_id if not exist insert Accounttd and facebook_token
     else {
       // setup sql
+      // $sql = "INSERT INTO Accounttd (firstname, lastname, email, facebook_id, birthday)
+      //   VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday')";
       $sql = "INSERT INTO Accounttd (firstname, lastname, email, facebook_id, birthday)
         VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday')";
 
       if (!mysqli_query($con,$sql)) {
         $json_result["result"] = 'Error: ' . mysqli_error($con);
+        $json_result["where"] = 'insert sql: ' . $sql;
+        $json_result["firstname"] = $post_firstname;
+        $json_result["lastname"] = $post_lastname;
+        $json_result["email"] = $post_email;
+        $json_result["facebook_id"] = $post_facebook_id;
+        $json_result["birthday"] = $post_birthday;
         //die('Error: ' . mysqli_error($con));
 
       } else {
