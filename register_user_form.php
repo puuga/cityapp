@@ -7,6 +7,7 @@
     facebook_id <input type="text" name="facebook_id"> <br/>
     birthday <input type="date" name="birthday"> <br/>
     facebook_token <input type="text" name="facebook_token"> <br/>
+    gender <input type="text" name="gender"> <br/>
     <input type="submit">
   </form>
 </body>

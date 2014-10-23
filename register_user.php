@@ -20,8 +20,9 @@
   $post_lastname = isset($_POST["lastname"]) ? $_POST["lastname"] : "" ;
   $post_email = isset($_POST["email"]) ? $_POST["email"] : "" ;
   $post_birthday = isset($_POST["birthday"]) ? $_POST["birthday"] : "" ;
-  $post_birthdays = explode( "/" , $post_birthday);
-  $post_birthday = $post_birthdays[2]."/".$post_birthdays[0]."/".$post_birthdays[1];
+  //$post_birthdays = explode( "/" , $post_birthday);
+  //$post_birthday = $post_birthdays[2]."/".$post_birthdays[0]."/".$post_birthdays[1];
+  $post_gender = isset($_POST["gender"]) ? $_POST["gender"] : "" ;
 
 
   // escape variables for security
@@ -30,6 +31,7 @@
   $post_firstname = mysqli_real_escape_string($con, $post_firstname);
   $post_lastname = mysqli_real_escape_string($con, $post_lastname);
   $post_email = mysqli_real_escape_string($con, $post_email);
+  $post_gender = mysqli_real_escape_string($con, $post_gender);
   //$post_birthday = mysqli_real_escape_string($con, $post_birthday);
 
 
@@ -38,7 +40,7 @@
   // check facebook_id and facebook_token if exist return success
 
   // setup sql
-  $sql = "SELECT * FROM Accounttd
+  $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender FROM Accounttd
     inner join facebook_token on Accounttd.accountid = facebook_token.account_id
     where facebook_id = '$post_facebook_id' and facebook_token = '$post_facebook_token'";
   $results = mysqli_query($con, $sql);
@@ -53,6 +55,7 @@
       $json_result["birthday"] = $row['birthday'];
       $json_result["facebook_id"] = $row['facebook_id'];
       $json_result["facebook_token"] = $row['facebook_token'];
+      $json_result["gender"] = $row['gender'];
     }
 
   }
@@ -60,7 +63,7 @@
   // check facebook_id if exist update facebook_token return success
   else if ( mysqli_num_rows($results)==0 ) {
 
-    $sql = "SELECT * FROM Accounttd
+    $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender FROM Accounttd
       inner join facebook_token on Accounttd.accountid = facebook_token.account_id
       where facebook_id = '$post_facebook_id'";
     $results = mysqli_query($con, $sql);
@@ -76,6 +79,7 @@
         $json_result["email"] = $row['email'];
         $json_result["facebook_id"] = $row['facebook_id'];
         $json_result["birthday"] = $row['birthday'];
+        $json_result["gender"] = $row['gender'];
         $db_accountid = $row['accountid'];
       }
 
@@ -92,8 +96,8 @@
       // setup sql
       // $sql = "INSERT INTO Accounttd (firstname, lastname, email, facebook_id, birthday)
       //   VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday')";
-      $sql = "INSERT INTO Accounttd (firstname, lastname, email, facebook_id, birthday)
-        VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday')";
+      $sql = "INSERT INTO Accounttd (firstname, lastname, email, facebook_id, birthday, gender)
+        VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday','$post_gender')";
 
       if (!mysqli_query($con,$sql)) {
         $json_result["result"] = 'Error: ' . mysqli_error($con);
@@ -103,10 +107,11 @@
         $json_result["email"] = $post_email;
         $json_result["facebook_id"] = $post_facebook_id;
         $json_result["birthday"] = $post_birthday;
+        $json_result["gender"] = $post_gender;
         //die('Error: ' . mysqli_error($con));
 
       } else {
-        $sql = "SELECT * FROM Accounttd
+        $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender FROM Accounttd
           where facebook_id = '$post_facebook_id'
           ORDER BY accountid DESC
           LIMIT 1";
@@ -122,6 +127,7 @@
           $json_result["email"] = $row['email'];
           $json_result["facebook_id"] = $row['facebook_id'];
           $json_result["birthday"] = $row['birthday'];
+          $json_result["gender"] = $row['gender'];
           $db_accountid = $row['accountid'];
         }
 
