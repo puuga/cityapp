@@ -85,7 +85,7 @@
 
       //update facebook_token to table facebook_token
       // setup sql
-      $sql = "UPDATE facebook_token set facebook_token='$post_facebook_token'
+      $sql = "UPDATE facebook_token set facebook_token='$post_facebook_token', update_at=SYSDATE()
         where account_id = $db_accountid";
       mysqli_query($con,$sql);
       $json_result["facebook_token"] = $post_facebook_token;
@@ -131,8 +131,8 @@
           $db_accountid = $row['accountid'];
         }
 
-        $sql = "INSERT INTO facebook_token (account_id, facebook_token)
-          VALUES ($db_accountid, '$post_facebook_token')";
+        $sql = "INSERT INTO facebook_token (account_id, facebook_token, create_at, update_at)
+          VALUES ($db_accountid, '$post_facebook_token', SYSDATE(), SYSDATE())";
         mysqli_query($con,$sql);
         $json_result["facebook_token"] = $post_facebook_token;
 
