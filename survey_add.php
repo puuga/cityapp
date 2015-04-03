@@ -2,7 +2,7 @@
   //survey_add.php
   header('Content-Type: application/json');
 ?>
-<?php include "db_connect.php" ?>
+<?php include "db_connect_oo.php" ?>
 <?php include "php_function.php" ?>
 <?php
   $json_result = array();
@@ -36,8 +36,8 @@
     $sql = "INSERT INTO Survey (accountid, lat, lng, datetime, macaddress1, macaddress2, macaddress3, rss1, rss2, rss3)
       VALUES ($post_accountid, '$post_lat', '$post_lng', Now(), '$post_macaddress1', '$post_macaddress2', '$post_macaddress3', '$post_rss1', '$post_rss2', '$post_rss3')";
 
-    if (!mysqli_query($con,$sql)) {
-      $json_result["result"] = 'Error: ' . mysqli_error($con);
+    if ( $con->query($sql) != true ) {
+      $json_result["result"] = 'Error: ' . $con->error;
 
     } else {
       $json_result["result"] = "add Survey success";
@@ -50,5 +50,6 @@
 
   // Return the data result as json
   echo json_encode($json_result);
-  mysqli_close($con);
+  // mysqli_close($con);
+  $con->close();
 ?>
