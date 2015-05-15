@@ -27,7 +27,7 @@
 
   // escape variables for security
   $post_facebook_id = mysqli_real_escape_string($con, $post_facebook_id);
-  $post_facebook_token = mysqli_real_escape_string($con, $post_facebook_token);
+  // $post_facebook_token = mysqli_real_escape_string($con, $post_facebook_token);
   $post_firstname = mysqli_real_escape_string($con, $post_firstname);
   $post_lastname = mysqli_real_escape_string($con, $post_lastname);
   $post_email = mysqli_real_escape_string($con, $post_email);
@@ -154,9 +154,9 @@
   // check facebook_id and facebook_token if exist return success
 
   // setup sql
-  $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender FROM accounttd
-    inner join facebook_token on accounttd.accountid = facebook_token.account_id
-    where facebook_id = '$post_facebook_id' and facebook_token = '$post_facebook_token'";
+  $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender,facebook_token FROM accounttd a
+    inner join facebook_token f on a.accountid = f.account_id
+    where a.facebook_id = '$post_facebook_id' and f.facebook_token = '$post_facebook_token'";
   // $results = mysqli_query($con, $sql);
   $results = $con->query($sql);
 
@@ -178,7 +178,7 @@
   // check facebook_id if exist update facebook_token return success
   else if ( $results->num_rows == 0 ) {
 
-    $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender FROM accounttd
+    $sql = "SELECT accountid,firstname,lastname,email,facebook_id,birthday,gender,facebook_token FROM accounttd
       inner join facebook_token on accounttd.accountid = facebook_token.account_id
       where facebook_id = '$post_facebook_id'";
     $results = $con->query($sql);
@@ -264,7 +264,7 @@
 
 
   } else {
-    $json_result["result"] = "unsuccess";
+    $json_result["result"] = "error";
   }
 
   // Return the data result as json

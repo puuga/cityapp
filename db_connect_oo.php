@@ -14,7 +14,8 @@
   // $dbname = "roomlinkDB";
 
   // digital ocean 128.199.133.166
-  $server = "localhost";
+  $server = "128.199.133.166";
+  // $server = "localhost";
   $username = "rls2014ss";
   $password = "rls2014ss";
   $dbname = "roomlinkdbmysql";
@@ -38,10 +39,10 @@
   // mysqli_set_charset($con , "UTF8");
   /* change character set to utf8 */
   if ( !$con->set_charset("utf8") ) {
-      printf("Error loading character set utf8: %s\n", $con->error);
+      // printf("Error loading character set utf8: %s\n", $con->error);
       $json_result["charset"] = "Error loading character set utf8:".$con->error;
   } else {
-      printf("Current character set: %s\n", $con->character_set_name());
+      // printf("Current character set: %s\n", $con->character_set_name());
       $json_result["charset"] = "Current character set:".$con->character_set_name();
   }
 
