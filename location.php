@@ -4,9 +4,12 @@
 ?>
 <?php include "db_connect_oo.php" ?>
 <?php
-  $sql = "SELECT id,name,latitude,longitude,radius
-          FROM location
+  $sql = "SELECT l.id,l.name,l.latitude,l.longitude,l.radius
+          FROM location l INNER JOIN apps a ON l.app_id=a.id
           WHERE is_active=1";
+  if ( isset($_GET['app']) ) {
+    $sql .= " and app='".$_GET['name']."'";
+  }
   if ( isset($_GET['name']) ) {
     $sql .= " and name='".$_GET['name']."'";
   }
