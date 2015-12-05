@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>RoomlinkSAAS Push</title>
+</head>
+
+<body>
+
+  <h1>RoomlinkSAAS Push</h1>
+
+  <div>
+    <h3>KlangPlaza</h3>
+    <p>
+      <form method="get" action="klangplaza_push.php">
+        <input type="hidden" name="rlskey" value="VJwVicd">
+        Title : <input type="text" name="title" required><br/>
+        Detail : <input type="text" name="detail" required><br/>
+        Tab:<br/>
+        <input type="radio" name="def" value="promotion" > promotion<br/>
+        <input type="radio" name="def" value="activity" > activity<br/>
+        <input type="radio" name="def" value="ecoupon" > ecoupon<br/>
+        Channel :<br/>
+        <input type="radio" name="channel" value="DEBUG" > DEBUG<br/>
+        <input type="radio" name="channel" value="" > Public<br/>
+
+        <br/>
+        <input type="submit">
+      </form>
+    </p>
+  </div>
+
+</body>
+
+</html>

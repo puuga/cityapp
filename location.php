@@ -4,14 +4,17 @@
 ?>
 <?php include "db_connect_oo.php" ?>
 <?php
-  $sql = "SELECT l.id,l.name,l.latitude,l.longitude,l.radius
+  $sql = "SELECT l.id,l.name,l.latitude,l.longitude,l.radius,l.is_test_location,l.enter_message,l.exit_message
           FROM location l INNER JOIN apps a ON l.app_id=a.id
           WHERE is_active=1";
   if ( isset($_GET['app']) ) {
-    $sql .= " and app='".$_GET['name']."'";
+    $sql .= " and app='".$_GET['app']."'";
   }
   if ( isset($_GET['name']) ) {
     $sql .= " and name='".$_GET['name']."'";
+  }
+  if ( isset($_GET['app_id']) ) {
+    $sql .= " and a.id='".$_GET['app_id']."'";
   }
   $result = $con->query($sql);
   if ($result->num_rows > 0) {
