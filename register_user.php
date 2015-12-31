@@ -23,6 +23,7 @@
   //$post_birthdays = explode( "/" , $post_birthday);
   //$post_birthday = $post_birthdays[2]."/".$post_birthdays[0]."/".$post_birthdays[1];
   $post_gender = isset($_POST["gender"]) ? $_POST["gender"] : "" ;
+  $post_app_id = isset($_POST["app_id"]) ? $_POST["app_id"] : "0" ;
 
 
   // escape variables for security
@@ -33,6 +34,7 @@
   $post_email = mysqli_real_escape_string($con, $post_email);
   $post_gender = mysqli_real_escape_string($con, $post_gender);
   //$post_birthday = mysqli_real_escape_string($con, $post_birthday);
+  $post_app_id = mysqli_real_escape_string($con, $post_app_id);
 
 
 
@@ -211,8 +213,8 @@
       // setup sql
       // $sql = "INSERT INTO accounttd (firstname, lastname, email, facebook_id, birthday)
       //   VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday')";
-      $sql = "INSERT INTO accounttd (firstname, lastname, email, facebook_id, birthday, gender)
-        VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday','$post_gender')";
+      $sql = "INSERT INTO accounttd (firstname, lastname, email, facebook_id, birthday, gender, app_id)
+        VALUES ('$post_firstname', '$post_lastname','$post_email','$post_facebook_id','$post_birthday','$post_gender', $post_app_id)";
 
       if ( $con->query($sql) === true ) {
         // $json_result["result"] = 'Error: ' . $con->error;

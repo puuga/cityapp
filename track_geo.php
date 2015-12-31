@@ -14,11 +14,11 @@
     VALUES ($location_id, $user_id, $app_id, '$action', NOW())";
 
   if ($con->query($sql) === TRUE) {
-      $json_result['result'] = "success";
-      $json_result['result_detail'] = "New record created successfully";
-      $json_result['last_id'] = $con->insert_id;
+    $json_result['result'] = "success";
+    $json_result['result_detail'] = "New record created successfully";
+    $json_result['last_id'] = $con->insert_id;
   } else {
-      $json_result['result'] = "Error: " . $sql . " -- " . $con->error;
+    $json_result['result'] = "Error: " . $sql . " -- " . $con->error;
   }
 
   $con->close();

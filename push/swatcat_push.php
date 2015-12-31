@@ -6,9 +6,9 @@ use Parse\ParseInstallation;
 use Parse\ParseClient;
 
 
-$app_id = "CCZqrKAmkckpA6gUFgVUtZBCIjDCgO1Tf5087DVc";
-$rest_key = "mwUbd44QGaErlC5BR6YwurJBrDmls3I0ThQspyqZ";
-$master_key = "BdtRlF4rA1GsZ0gRKHeT7EmiqK1Zv90P4dW6rhLA";
+$app_id = "YB5oDQyTzU1DDJSyi9E4kf9cbWEZichmKTVlmyBR";
+$rest_key = "aFXehgIYQKjxxYfsdCQbp8CEJyyS2E9KWXQZYbqq";
+$master_key = "U7EQNxgbOEeijPjxdTPCH4hXqUAYQdV3fdx2pcVK";
 
 ParseClient::initialize( $app_id, $rest_key, $master_key );
 
