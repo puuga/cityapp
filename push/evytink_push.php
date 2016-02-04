@@ -34,21 +34,33 @@ if ( !isset($_GET["title"]) || !isset($_GET["detail"]) || $_GET["rlskey"]!=="VJw
     } else {
       $channels = [$_GET["channel"]];
     }
-
   } else {
     $channels = ["GLOBAL"];
   }
 
-  // send push
-  ParsePush::send(array(
-    "channels" => $channels,
-    "data" => $data
-  ));
+  if ( !isset($_GET["deviceType"]) ) {
+    $deviceType = "all";
+
+    // send push
+    ParsePush::send(array(
+      "channels" => $channels,
+      "data" => $data
+    ));
+  } else {
+    $deviceType = $_GET["deviceType"];
+    // send push
+    ParsePush::send(array(
+      "channels" => $channels,
+      "deviceType" => $deviceType,
+      "data" => $data
+    ));
+  }
 
   $result["result"] = "success";
   $result["title"] = $title;
   $result["detail"] = $detail;
   $result["channels"] = $channels;
+  $result["deviceType"] = $deviceType;
 }
 
 header('Content-Type: application/json');
